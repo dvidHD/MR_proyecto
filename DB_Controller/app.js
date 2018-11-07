@@ -339,68 +339,62 @@ app.put('/bodega/v1/consumible/:id/', (req,res) =>{
 
 // Delete ONE
 
-app.delete('/bodega/v1/melectrico/:id/',(req,res) =>{
-    MElectrico
+app.delete('/bodega/v1/consumible/:id/',(req,res) =>{
+    Consumible
         .findByIdAndDelete(req.params.id)
         .exec()
         .then()
         .catch(error => res.status(404).send(error));
 });
 
+// --- CRUD MDIDACTICO ----//
 
-/*
-  // ----  Crud Peliculas ---//
-// Post
+//Create one
 
-  app.post('/api/v1/peliculas/',(req,res) =>{
+app.post('/bodega/v1/mdidactico',(req,res) =>{
     //cacho atributos
-    const {nombre,fecha,director,genero,duracion,imagen} = req.body;
+    const {tipo,cantidad} = req.body;
     // creo un nuevo objeto de la coleccion
-    const peliculaNueva = Pelicula({
-        nombre: nombre,
-        fecha: fecha,
-        director: director,
-        genero: genero,
-        duracion: duracion,
-        imagen: imagen
+    const mdidacticoNuevo = MDidactico({
+        tipo: tipo,
+        cantidad: cantidad
     });
 
     //guardar el obj en la coleccion
 
-    peliculaNueva.save((error,nuevaPelicula) => {
-        res.status(201).send(nuevaPelicula);
+    mdidacticoNuevo.save((error,nuevoMDidactico) => {
+        res.status(201).send(nuevoMDidactico);
     })
 
 });
 
-// GET ALL
+// Get ALL
 
-app.get('/api/v1/peliculas/',(req,res) => {
+app.get('/bodega/v1/mdidactico',(req,res) => {
        
-    Pelicula
+    MDidactico
         .find()
         .exec()
-        .then(listaPeliculas =>{
-            res.status(200).send(listaPeliculas);
+        .then(listaMDidactico =>{
+            res.status(200).send(listaMDidactico);
         })
         .catch(error => res.status(400).send(error));
 
 });
 
-
 // Get ONE
 //lleva un query param
-app.get('/api/v1/peliculas/:id/', (req,res) =>{
-    const {id} = req.params;  // aplico des estructuracion
+app.get('/bodega/v1/mdidactico/:id/', (req,res) =>{
+    const {id} = req.params;  // aplico des-estructuracion
 
-    Pelicula
+    MDidactico
         .findById(id)
         .exec()
-        .then(pelicula => res.status(200).send(pelicula))
+        .then(mdidactico => res.status(200).send(mdidactico))
         .catch(error => {
             error.name === 'CastError'
             ?res.status(404).send({
-                "Error": "no fue posible hallar la pelicula con el id especificado"
+                "Error": "no fue posible hallar el  material didactico especificado"
             })
             :res.status(404).send(error)
         });
@@ -408,30 +402,114 @@ app.get('/api/v1/peliculas/:id/', (req,res) =>{
 
 });
 
-// UPDATE ONE
 
-app.put('/api/v1/pelicula/:id/', (req,res) =>{
+//Update One
+
+app.put('/bodega/v1/mdidactico/:id/', (req,res) =>{
     const {id} = req.params;
 
-    Pelicula
+    MDidactico
         .findByIdAndUpdate(
             id,
             {$set: req.body},
             {new: true}
         )
         .exec()
-        .then(peliculaActualizada => res.status(200).send(peliculaActualizada))
+        .then(mdidacticoActualizado => res.status(200).send(mdidacticoActualizado))
         .catch(error => res.status(400).send(error));
 })
 
-app.delete('/api/v1/pelicula/:id/',(req,res) =>{
-    Pelicula
+// Delete ONE
+
+app.delete('/bodega/v1/mdidactico/:id/',(req,res) =>{
+    MDidactico
         .findByIdAndDelete(req.params.id)
         .exec()
-        .then(()=> res.status(204).send({"mensaje": "Pelicula eliminada"}))
+        .then()
         .catch(error => res.status(404).send(error));
 });
-*/
+
+// --- CRUD CABLE ----//
+
+//Create one
+
+app.post('/bodega/v1/cable',(req,res) =>{
+    //cacho atributos
+    const {tipo,cantidad} = req.body;
+    // creo un nuevo objeto de la coleccion
+    const cableNuevo = Cable({
+        tipo: tipo,
+        cantidad: cantidad
+    });
+
+    //guardar el obj en la coleccion
+
+    cableNuevo.save((error,nuevoCable) => {
+        res.status(201).send(nuevoCable);
+    })
+
+});
+
+// Get ALL
+
+app.get('/bodega/v1/cable',(req,res) => {
+       
+    Cable
+        .find()
+        .exec()
+        .then(listaCables =>{
+            res.status(200).send(listaCables);
+        })
+        .catch(error => res.status(400).send(error));
+
+});
+
+// Get ONE
+//lleva un query param
+app.get('/bodega/v1/cable/:id/', (req,res) =>{
+    const {id} = req.params;  // aplico des-estructuracion
+
+    Cable
+        .findById(id)
+        .exec()
+        .then(cable => res.status(200).send(cable))
+        .catch(error => {
+            error.name === 'CastError'
+            ?res.status(404).send({
+                "Error": "no fue posible hallar el  tipo de cable especificado"
+            })
+            :res.status(404).send(error)
+        });
+
+
+});
+
+
+//Update One
+
+app.put('/bodega/v1/mdidactico/:id/', (req,res) =>{
+    const {id} = req.params;
+
+    MDidactico
+        .findByIdAndUpdate(
+            id,
+            {$set: req.body},
+            {new: true}
+        )
+        .exec()
+        .then(mdidacticoActualizado => res.status(200).send(mdidacticoActualizado))
+        .catch(error => res.status(400).send(error));
+})
+
+// Delete ONE
+
+app.delete('/bodega/v1/mdidactico/:id/',(req,res) =>{
+    MDidactico
+        .findByIdAndDelete(req.params.id)
+        .exec()
+        .then()
+        .catch(error => res.status(404).send(error));
+});
 
 app.listen(port, function () {
     console.log('Example app listening on port ' + port + '!');
