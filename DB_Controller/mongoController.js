@@ -8,7 +8,7 @@ mongoose.connect(URI_DB,
     console.log("Conexión exitosa con la BDD");
 });
 
-/*
+
 // Shortcuts por comodiddad
 const Schema =  mongoose.Schema;
 const ObjectId = mongoose.Schema.ObjectId;
@@ -16,31 +16,63 @@ const ObjectId = mongoose.Schema.ObjectId;
 
 // Esquemas (moldes) para crear colecciones en la bdd
 
-const directorSchema = Schema ({
-    director: ObjectId,
-    nombre: {type:String, required: [true,"Why no name"]},
-    edad: Number,
-    peliculas: [String],
-    imagen: String
+const robotSchema = Schema({
+    robot: ObjectId,
+    tipo: {type:String, required: [true,"Se necesita el tipo de Robot"]},
+    id: Number,
+    comentario: String
+
 });
 
-const peliculaSchema = Schema ({
-    pelciula: ObjectId,
-    nombre: String,
-    fecha: Date,
-    director: [String],
-    genero: String,
-    duracion: Number,
-    imagen: String
+const computadoraSchema = Schema({
+    computadora: ObjectId,
+    tipo: {type:String, required: [true,"Se necesita el tipo de Robot"]},
+    id: Number,
+    comentario: String
 });
 
+const melectrictoSchema = Schema({
+    melectrico: ObjectId,
+    tipo: {type:String, required: [true,"Se necesita el tipo de material eléctrico"]},
+    cantidad: Number
+})
+
+const consumibleSchema = Schema ({
+    consumible: ObjectId,
+    tipo: {type:String, required: [true,"Se necesita el tipo de material eléctrico"]},
+    cantidad: Number
+})
+
+const mdidacticoSchema = Schema ({
+    mdidactico: ObjectId,
+    tipo: {type:String, required: [true,"Se necesita el tipo de material didactico"]},
+    cantidad: Number
+})
+
+const cablesSchema = Schema ({
+    cables: ObjectId,
+    tipo: {type:String, required: [true,"Se necesita el tipo de material didactico"]},
+    cantidad: Number
+})
+
+const mermaSchema = Schema ({
+    merma: ObjectId,
+    tipo: {type:String, required: [true,"Se necesita el tipo de material didactico"]},
+    cantidad: Number,
+    fecha: Date
+})
 //  creamos los modelos que son el vinculo y nos permiten crear y modificar colecciones
 // de nuestra BDD, las colecciones a su vez estan enlazadas con los esquemas
 
-const Director = mongoose.model('Director',directorSchema);
-const Pelicula = mongoose.model('Pelicula',peliculaSchema);
+const Robot = mongoose.model('Robot', robotSchema);
+const Computadora = mongoose.model('Computadora', computadoraSchema);
+const MElectrico = mongoose.model('MElectrico',melectrictoSchema);
+const Consumible = mongoose.model('Consumible',consumibleSchema);
+const MDidactico = mongoose.model('MDidactico',mdidacticoSchema);
+const Cable = mongoose.model('Cable',cablesSchema);
+const Merma = mongoose.model('Merma',mermaSchema);
+
 
 //exportar mediante npm los modelos para poder utilizarlos en otro archivo
 
-module.exports = {Director,Pelicula};
-*/
+module.exports = {Robot,Computadora,MElectrico,Consumible,MDidactico,Cable,Merma};
