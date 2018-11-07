@@ -487,29 +487,113 @@ app.get('/bodega/v1/cable/:id/', (req,res) =>{
 
 //Update One
 
-app.put('/bodega/v1/mdidactico/:id/', (req,res) =>{
+app.put('/bodega/v1/cable/:id/', (req,res) =>{
     const {id} = req.params;
 
-    MDidactico
+    Cable
         .findByIdAndUpdate(
             id,
             {$set: req.body},
             {new: true}
         )
         .exec()
-        .then(mdidacticoActualizado => res.status(200).send(mdidacticoActualizado))
+        .then(cableActualizado => res.status(200).send(cableActualizado))
         .catch(error => res.status(400).send(error));
 })
 
 // Delete ONE
 
-app.delete('/bodega/v1/mdidactico/:id/',(req,res) =>{
-    MDidactico
+app.delete('/bodega/v1/cable/:id/',(req,res) =>{
+    Cable
         .findByIdAndDelete(req.params.id)
         .exec()
         .then()
         .catch(error => res.status(404).send(error));
 });
+
+// --- CRUD MERMA ----//
+
+//Create one
+
+app.post('/bodega/v1/merma',(req,res) =>{
+    //cacho atributos
+    const {tipo,cantidad, fecha} = req.body;
+    // creo un nuevo objeto de la coleccion
+    const mermaNuevoa = Merma({
+        tipo: tipo,
+        cantidad: cantidad,
+        fecha: fecha
+    });
+
+    //guardar el obj en la coleccion
+
+    mermaNueva.save((error,nuevaMerma) => {
+        res.status(201).send(nuevaMerma);
+    })
+
+});
+
+// Get ALL
+
+app.get('/bodega/v1/merma',(req,res) => {
+       
+    Merma
+        .find()
+        .exec()
+        .then(listaMerma =>{
+            res.status(200).send(listaMerma);
+        })
+        .catch(error => res.status(400).send(error));
+
+});
+
+// Get ONE
+//lleva un query param
+app.get('/bodega/v1/merma/:id/', (req,res) =>{
+    const {id} = req.params;  // aplico des-estructuracion
+
+    Merma
+        .findById(id)
+        .exec()
+        .then(merma => res.status(200).send(merma))
+        .catch(error => {
+            error.name === 'CastError'
+            ?res.status(404).send({
+                "Error": "no fue posible hallar la merma especificado"
+            })
+            :res.status(404).send(error)
+        });
+
+
+});
+
+
+//Update One
+
+app.put('/bodega/v1/merma/:id/', (req,res) =>{
+    const {id} = req.params;
+
+    Merma
+        .findByIdAndUpdate(
+            id,
+            {$set: req.body},
+            {new: true}
+        )
+        .exec()
+        .then(mermaActualizada => res.status(200).send(mermaActualizada))
+        .catch(error => res.status(400).send(error));
+})
+
+// Delete ONE
+
+app.delete('/bodega/v1/merma/:id/',(req,res) =>{
+    Merma
+        .findByIdAndDelete(req.params.id)
+        .exec()
+        .then()
+        .catch(error => res.status(404).send(error));
+});
+
 
 app.listen(port, function () {
     console.log('Example app listening on port ' + port + '!');
