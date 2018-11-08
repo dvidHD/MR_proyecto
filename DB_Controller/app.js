@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 //  get a raiz
 app.get('/', (req, res) => {
-    res.status(200).send('Hello World!');
+    res.status(200).send('');
   });
 
   const port = process.env.PORT || 3000;

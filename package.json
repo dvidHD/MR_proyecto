@@ -12,6 +12,9 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "mongoose": "^5.3.4"
+    "mongoose": "^5.3.4",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "reactstrap": "^6.5.0"
   }
 }
