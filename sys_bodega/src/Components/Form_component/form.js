@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../Form_component/form.css';
 
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import {  Form, FormGroup, Label, Input} from 'reactstrap';
 
 export default class Example extends React.Component {
   render() {
@@ -45,22 +45,30 @@ export default class Example extends React.Component {
         <FormGroup tag="fieldset">
           <legend>Computadoras</legend>
           <FormGroup check>
-          <Input type="checkbox" name="check" id="exampleCheck"/>
-          <Label for="exampleCheck" check>001</Label>
+          <Label check>
+            <Input type="checkbox" />{' '}
+            001
+          </Label>
         </FormGroup>
           
         <FormGroup check>
-          <Input type="checkbox" name="check" id="exampleCheck"/>
-          <Label for="exampleCheck" check>002</Label>
+          <Label check>
+            <Input type="checkbox" />{' '}
+            002
+          </Label>
         </FormGroup>
           
         <FormGroup check>
-          <Input type="checkbox" name="check" id="exampleCheck"/>
-          <Label for="exampleCheck" check>003</Label>
+          <Label check>
+            <Input type="checkbox" />{' '}
+            003
+          </Label>
         </FormGroup>
         <FormGroup check>
-          <Input type="checkbox" name="check" id="exampleCheck"/>
-          <Label for="exampleCheck" check>004</Label>
+          <Label check>
+            <Input type="checkbox" />{' '}
+            004
+          </Label>
         </FormGroup>
          
         </FormGroup>
