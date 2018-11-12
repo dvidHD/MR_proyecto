@@ -21,11 +21,8 @@ export default class Example extends React.Component {
           <select id="robots" name="robots">
           <option value="sc">Screbbler</option>
           <option value="ev">Ev3</option>
-        <option value="frog">Forgduino</option>
-         <option value="ard">Arduino</option>
-          <option value="oru">Oruga</option>
-          <option value="rat">Ratón</option>
-          <option value="sin">Sin Robots</option>
+          <option value="frog">Forgduino</option>
+          <option value="ard">Arduino</option>
           </select>
         </form>
         <FormGroup >
