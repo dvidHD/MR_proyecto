@@ -1,17 +1,19 @@
 
 input[type=text] {
+    
     width: 90%;
     padding: 7px 11px;
     margin: 9px 0;
     box-sizing: border-box ;
     border-radius: 10px;
-    border: 4px solid #555544;
+    border: 4px solid #0a0a0a;
     font-family: Tahoma;
     font-weight: 900;
+
 }  
 
 label {
-   color: white;
+   color: black;
    font-size: 100%;
    font-family: Tahoma;
    font-weight: 700;
@@ -41,17 +43,24 @@ select {
    display:inline-block;
 }
 
-.matdidac{
-    margin-top: 5%;
-    float: left;
-    left: 450px;
+.mat{
+    padding: 7px 11px;
+    font-size: 90%;
 }
 
 .compu{
-    margin-top: 30%; 
+    
+    box-sizing: border-box ;
+    
 }
 
 button{
-    font-family: Arial;
-    font-size: 90%;
+    
+    font-family:Verdana,Helvetica;
+    font-weight:bold;
+    color:white;
+    background:rgb(0, 0, 14);
+    border-radius: 10px;
+    width:200px;
+    height:29px;
 }

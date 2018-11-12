@@ -21,8 +21,11 @@ export default class Example extends React.Component {
           <select id="robots" name="robots">
           <option value="sc">Screbbler</option>
           <option value="ev">Ev3</option>
-    n     <option value="frog">Forgduino</option>
-    n     <option value="ard">Arduino</option>
+        <option value="frog">Forgduino</option>
+         <option value="ard">Arduino</option>
+          <option value="oru">Oruga</option>
+          <option value="rat">Ratón</option>
+          <option value="sin">Sin Robots</option>
           </select>
         </form>
         <FormGroup >
@@ -32,37 +35,38 @@ export default class Example extends React.Component {
           
         </form>
         </FormGroup>
-        <form class="matdidac">
-        <FormGroup>
-          <Label for="matdidac">Material Didactico </Label>
-          <Input type="textarea" name="matdidac" id="matdidac" placeholder="Foami,Memorama,Tijeras, etc ..."/>
-        </FormGroup></form>
+         <fom class="mat">
+        <FormGroup >
+          <Label for="matdic"> Material Didactico</Label>
+          <Input type="text" name="matdic" id="matdic" placeholder="Foami,memorama,tiejras,etc..." />
+        </FormGroup></fom>
+
         <fom class="compu">
         <FormGroup tag="fieldset">
           <legend>Computadoras</legend>
           <FormGroup check>
-            <Label check>
-              <Input type="radio" name="radio1" />{' '}
-              001
-            </Label>
-          </FormGroup>
-          <fom></fom>
-          <FormGroup check>
-            <Label check>
-              <Input type="radio" name="radio1" />{' '}
-              002
-            </Label>
-          </FormGroup>
-          <FormGroup check disabled>
-            <Label check>
-              <Input type="radio" name="radio1" disabled />{' '}
-             003
-            </Label>
-          </FormGroup>
+          <Input type="checkbox" name="check" id="exampleCheck"/>
+          <Label for="exampleCheck" check>001</Label>
+        </FormGroup>
+          
+        <FormGroup check>
+          <Input type="checkbox" name="check" id="exampleCheck"/>
+          <Label for="exampleCheck" check>002</Label>
+        </FormGroup>
+          
+        <FormGroup check>
+          <Input type="checkbox" name="check" id="exampleCheck"/>
+          <Label for="exampleCheck" check>003</Label>
+        </FormGroup>
+        <FormGroup check>
+          <Input type="checkbox" name="check" id="exampleCheck"/>
+          <Label for="exampleCheck" check>004</Label>
+        </FormGroup>
+         
         </FormGroup>
         </fom>
-        <Button>Confirmar Solicitud</Button>
-      
+        <button  type="submit" >Enviar Solicitud</button>
+        
       </Form>
     );
   }
