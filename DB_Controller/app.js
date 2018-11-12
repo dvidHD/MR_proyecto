@@ -1,7 +1,8 @@
 const express = require ('express');
 const bodyParser = require('body-parser');
 
-const {Robot,Computadora,MElectrico,Consumible,MDidactico,Cable,Merma} = require('./mongoController');
+const {Robot,Computadora,MElectrico,Consumible,
+    MDidactico,Cable,Merma,Clase,Instructor,Solicitud} = require('./mongoController');
 
 const app = express();
 
@@ -519,7 +520,7 @@ app.post('/bodega/v1/merma',(req,res) =>{
     //cacho atributos
     const {tipo,cantidad, fecha} = req.body;
     // creo un nuevo objeto de la coleccion
-    const mermaNuevoa = Merma({
+    const mermaNueva = Merma({
         tipo: tipo,
         cantidad: cantidad,
         fecha: fecha
@@ -594,6 +595,265 @@ app.delete('/bodega/v1/merma/:id/',(req,res) =>{
         .catch(error => res.status(404).send(error));
 });
 
+// --- CRUD CLASE----//
+
+//Create one
+
+app.post('/operacion/v1/clase',(req,res) =>{
+    //cacho atributos
+    const {nivel,escuela, dia} = req.body;
+    // creo un nuevo objeto de la coleccion
+    const claseNueva = Clase({
+        nivel: nivel,
+        escuela:escuela,
+        dia: dia
+    });
+
+    //guardar el obj en la coleccion
+
+    claseNueva.save((error,nuevaClase) => {
+        res.status(201).send(nuevaClase);
+    })
+
+});
+
+// Get ALL
+
+app.get('/operacion/v1/clase',(req,res) => {
+       
+    Clase
+        .find()
+        .exec()
+        .then(listaClases =>{
+            res.status(200).send(listaClases);
+        })
+        .catch(error => res.status(400).send(error));
+
+});
+
+// Get ONE
+//lleva un query param
+app.get('/operacion/v1/clase/:id/', (req,res) =>{
+    const {id} = req.params;  // aplico des-estructuracion
+
+    Clase
+        .findById(id)
+        .exec()
+        .then(clase => res.status(200).send(clase))
+        .catch(error => {
+            error.name === 'CastError'
+            ?res.status(404).send({
+                "Error": "no fue posible hallar la clase especificada"
+            })
+            :res.status(404).send(error)
+        });
+
+
+});
+
+
+//Update One
+
+app.put('/operacion/v1/clase/:id/', (req,res) =>{
+    const {id} = req.params;
+
+    Clase
+        .findByIdAndUpdate(
+            id,
+            {$set: req.body},
+            {new: true}
+        )
+        .exec()
+        .then(claseActualizada => res.status(200).send(claseActualizada))
+        .catch(error => res.status(400).send(error));
+})
+
+// Delete ONE
+
+app.delete('/operacion/v1/clase/:id/',(req,res) =>{
+    Clase
+        .findByIdAndDelete(req.params.id)
+        .exec()
+        .then()
+        .catch(error => res.status(404).send(error));
+});
+
+
+// --- CRUD INSTRUCTOR---//
+
+//Create one
+
+app.post('/operacion/v1/instructor',(req,res) =>{
+    //cacho atributos
+    const {nombre, clases} = req.body;
+    // creo un nuevo objeto de la coleccion
+    const instructorNuevo = Clase({
+        nombre: nombre,
+        clases: clases
+    });
+
+    //guardar el obj en la coleccion
+
+    instructorNuevo.save((error,nuevoInstructor) => {
+        res.status(201).send(nuevoInstructor);
+    })
+
+});
+
+// Get ALL
+
+app.get('/operacion/v1/instructor',(req,res) => {
+       
+    Instructor
+        .find()
+        .populate('clases')
+        .exec()
+        .then(listaInstructores =>{
+            res.status(200).send(listaInstructores);
+        })
+        .catch(error => res.status(400).send(error));
+
+});
+
+// Get ONE
+//lleva un query param
+app.get('/operacion/v1/instructor/:id/', (req,res) =>{
+    const {id} = req.params;  // aplico des-estructuracion
+
+    Instructor
+        .findById(id)
+        .populate('clases')
+        .exec()
+        .then(instructor => res.status(200).send(instructor))
+        .catch(error => {
+            error.name === 'CastError'
+            ?res.status(404).send({
+                "Error": "no fue posible hallar el instructor especificado"
+            })
+            :res.status(404).send(error)
+        });
+
+
+});
+
+
+//Update One
+
+app.put('/operacion/v1/instructor/:id/', (req,res) =>{
+    const {id} = req.params;
+
+    Instructor
+        .findByIdAndUpdate(
+            id,
+            {$set: req.body},
+            {new: true}
+        )
+        .populate('clases')
+        .exec()
+        .then(instructorActualizado => res.status(200).send(instructorActualizado))
+        .catch(error => res.status(400).send(error));
+})
+
+// Delete ONE
+
+app.delete('/operacion/v1/instructor/:id/',(req,res) =>{
+    
+    Instructor
+        .findByIdAndDelete(req.params.id)
+        .exec()
+        .then()
+        .catch(error => res.status(404).send(error));
+});
+
+// --- CRUD SOLICITUD---//
+
+//Create one
+
+app.post('/operacion/v1/solicitud',(req,res) =>{
+    //cacho atributos
+    const {robot, computadora, melectrico, consumible, mdidactico, cable} = req.body;
+    // creo un nuevo objeto de la coleccion
+    const solicitudNueva = Clase({
+        robot: robot,
+        computadora: computadora,
+        melectrico: melectrico,
+        consumible: consumible,
+        mdidactico: mdidactico,
+        cable: cable
+    });
+
+    //guardar el obj en la coleccion
+
+    solicitudNueva.save((error,nuevaSolicitud) => {
+        res.status(201).send(nuevaSolicitud);
+    })
+
+});
+
+// Get ALL
+
+app.get('/operacion/v1/solicitud',(req,res) => {
+       
+    Solicitud
+        .find()
+        .populate('robot', 'computadora', 'melectrico', 'consumible', 'mdidactico', 'cable')
+        .exec()
+        .then(listaInstructores =>{
+            res.status(200).send(listaInstructores);
+        })
+        .catch(error => res.status(400).send(error));
+
+});
+
+// Get ONE
+//lleva un query param
+app.get('/operacion/v1/solicitud/:id/', (req,res) =>{
+    const {id} = req.params;  // aplico des-estructuracion
+
+    Solicitud
+        .findById(id)
+        .populate('robot', 'computadora', 'melectrico', 'consumible', 'mdidactico', 'cable')
+        .exec()
+        .then(solicitud => res.status(200).send(solicitud))
+        .catch(error => {
+            error.name === 'CastError'
+            ?res.status(404).send({
+                "Error": "no fue posible hallar la solicitud"
+            })
+            :res.status(404).send(error)
+        });
+
+
+});
+
+
+//Update One
+
+app.put('/operacion/v1/solicitud/:id/', (req,res) =>{
+    const {id} = req.params;
+
+    Solicitud
+        .findByIdAndUpdate(
+            id,
+            {$set: req.body},
+            {new: true}
+        )
+        .populate('robot', 'computadora', 'melectrico', 'consumible', 'mdidactico', 'cable')
+        .exec()
+        .then(solicitudActualizada => res.status(200).send(solicitudActualizada))
+        .catch(error => res.status(400).send(error));
+})
+
+// Delete ONE
+
+app.delete('/operacion/v1/solicitud/:id/',(req,res) =>{
+    
+    Solicitud
+        .findByIdAndDelete(req.params.id)
+        .exec()
+        .then()
+        .catch(error => res.status(404).send(error));
+});
 
 app.listen(port, function () {
     console.log('Example app listening on port ' + port + '!');

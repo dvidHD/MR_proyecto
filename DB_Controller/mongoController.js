@@ -61,6 +61,35 @@ const mermaSchema = Schema ({
     cantidad: Number,
     fecha: Date
 })
+
+const claseSchema = Schema({
+    clase: ObjectId,
+    nivel: {type:String, required: [true,"Se necesita el nivel"]},
+    escuela: String,
+    dia: String
+})
+
+const instructorSchema = Schema({
+    instructor: ObjectId,
+    nombre: {type:String, required: [true,"Se necesita el nombre del instructor"]},
+    clases: [{
+        type: ObjectId,
+        ref: 'Clase'
+    }] 
+})
+
+const solicitudSchema = Schema({
+    solicitud: ObjectId,
+    material:{
+        robot: [{type: ObjectId, ref: 'Robot'}],
+        computadora: [{computadora: ObjectId,ref: 'Computadora'}],
+        melectrico: [{melectrico: ObjectId,ref: 'MElectrico'}],
+        consumible: [{consumible: ObjectId,ref: 'Consumible'}],
+        mdidactico: [{mdidactico: ObjectId,ref: 'MDidactico'}],
+        cable: [{cable: ObjectId,ref: 'Cable'}]
+    }
+})
+
 //  creamos los modelos que son el vinculo y nos permiten crear y modificar colecciones
 // de nuestra BDD, las colecciones a su vez estan enlazadas con los esquemas
 
@@ -71,8 +100,22 @@ const Consumible = mongoose.model('Consumible',consumibleSchema);
 const MDidactico = mongoose.model('MDidactico',mdidacticoSchema);
 const Cable = mongoose.model('Cable',cablesSchema);
 const Merma = mongoose.model('Merma',mermaSchema);
+const Clase = mongoose.model('Clase',claseSchema);
+const Instructor = mongoose.model('Instructor',instructorSchema);
+const Solicitud = mongoose.model('Instructor', solicitudSchema);
 
 
 //exportar mediante npm los modelos para poder utilizarlos en otro archivo
 
-module.exports = {Robot,Computadora,MElectrico,Consumible,MDidactico,Cable,Merma};
+module.exports = {
+    Robot,
+    Computadora,
+    MElectrico,
+    Consumible,
+    MDidactico,
+    Cable,
+    Merma,
+    Clase,
+    Instructor,
+    Solicitud
+};
