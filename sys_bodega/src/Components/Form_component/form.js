@@ -7,7 +7,8 @@ import {  Form, FormGroup, Label, Input} from 'reactstrap';
 export default class Example extends React.Component {
   render() {
     return (
-      <Form>
+      
+     <Form className="fondo" >
         <FormGroup >
           <Label for="nombre"> Nombre </Label>
           <Input type="text" name="nombre" id="nombre" placeholder="Ingresa tu nombre" />

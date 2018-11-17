@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import './App.css';
+
 import Form from './Components/Form_component/form'
-import NavBar from './Components/NavBar_component/navbar'
+import NavBar from './Components/Form_component/navbar'
 
 
 
@@ -15,7 +15,7 @@ class App extends Component {
        
         <header className="App-header">
          
-          
+        <NavBar/> 
           <Form/>
          
         </header>
