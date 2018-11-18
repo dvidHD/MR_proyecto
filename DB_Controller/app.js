@@ -856,5 +856,5 @@ app.delete('/operacion/v1/solicitud/:id/',(req,res) =>{
 });
 
 app.listen(port, function () {
-    console.log('Example app listening on port ' + port + '!');
+   
   });

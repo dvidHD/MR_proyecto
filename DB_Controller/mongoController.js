@@ -81,12 +81,12 @@ const instructorSchema = Schema({
 const solicitudSchema = Schema({
     solicitud: ObjectId,
     material:{
-        robot: [{type: ObjectId, ref: 'Robot'}],
-        computadora: [{computadora: ObjectId,ref: 'Computadora'}],
-        melectrico: [{melectrico: ObjectId,ref: 'MElectrico'}],
-        consumible: [{consumible: ObjectId,ref: 'Consumible'}],
-        mdidactico: [{mdidactico: ObjectId,ref: 'MDidactico'}],
-        cable: [{cable: ObjectId,ref: 'Cable'}]
+        robot: ['Robot'],
+        computadora: ['Computadora'],
+        melectrico: ['MElectrico'],
+        consumible: ['Consumible'],
+        mdidactico: ['MDidactico'],
+        cable: ['Cable']
     }
 })
 
@@ -102,7 +102,7 @@ const Cable = mongoose.model('Cable',cablesSchema);
 const Merma = mongoose.model('Merma',mermaSchema);
 const Clase = mongoose.model('Clase',claseSchema);
 const Instructor = mongoose.model('Instructor',instructorSchema);
-const Solicitud = mongoose.model('Instructor', solicitudSchema);
+const Solicitud = mongoose.model('Solicitud', solicitudSchema);
 
 
 //exportar mediante npm los modelos para poder utilizarlos en otro archivo
