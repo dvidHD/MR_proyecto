@@ -687,7 +687,7 @@ app.post('/operacion/v1/instructor',(req,res) =>{
     //cacho atributos
     const {nombre, clases} = req.body;
     // creo un nuevo objeto de la coleccion
-    const instructorNuevo = Clase({
+    const instructorNuevo = Instructor({
         nombre: nombre,
         clases: clases
     });
